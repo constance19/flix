@@ -21,8 +21,8 @@
                                 <rect key="frame" x="0.0" y="29" width="414" height="833"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="WRZ-Tb-khB">
-                                    <rect key="frame" x="0.0" y="237.00000034679067" width="414" height="44"/>
+                                <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="WRZ-Tb-khB">
+                                    <rect key="frame" x="0.0" y="237.00000034679067" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </activityIndicatorView>
@@ -79,7 +79,7 @@
             </objects>
             <point key="canvasLocation" x="138" y="927"/>
         </scene>
-        <!--Movies Grid View Controller-->
+        <!--Movies-->
         <scene sceneID="xwp-Q5-W6h">
             <objects>
                 <viewController id="awv-yL-R2M" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -114,6 +114,7 @@
                                         <size key="customSize" width="144" height="219"/>
                                         <connections>
                                             <outlet property="posterView" destination="5N0-hC-dgt" id="ZkN-89-wzW"/>
+                                            <segue destination="924-aq-zWK" kind="show" identifier="collectionDetail" id="FDZ-bE-pPw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -122,7 +123,7 @@
                         <viewLayoutGuide key="safeArea" id="l8U-rj-yeb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Vf0-vZ-4fL"/>
+                    <navigationItem key="navigationItem" title="Movies" id="Vf0-vZ-4fL"/>
                     <connections>
                         <outlet property="collectionView" destination="b0Z-dg-dRc" id="fEv-F6-Ziz"/>
                     </connections>
@@ -240,6 +241,9 @@
             <point key="canvasLocation" x="1507" y="110"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="FDZ-bE-pPw"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

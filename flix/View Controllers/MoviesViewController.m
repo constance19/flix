@@ -53,11 +53,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.activityIndicator startAnimating];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [self.activityIndicator startAnimating];
     [self fetchMovies];
     [self.activityIndicator stopAnimating];
     
@@ -68,6 +68,7 @@
 
 - (void)fetchMovies {
 //    [SVProgressHUD show];
+//    [self.activityIndicator startAnimating];
     
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
@@ -83,6 +84,7 @@
                UIAlertAction *tryAction = [UIAlertAction actionWithTitle:@"Try Again"
                                                                    style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * _Nonnull action) {
+                   [self fetchMovies];
                                                                         // handle try again response here. Doing nothing will dismiss the view.
                                                                  }];
                // add the try again action to the alertController
@@ -143,7 +145,6 @@
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL:posterURL];
     
-    
 //    cell.textLabel.text = movie[@"title"];
     
     return cell;
@@ -164,6 +165,7 @@
     detailsViewController.movie = movie;
     
     NSLog(@"Tapping on a movie!");
+    
 }
 
 @end
