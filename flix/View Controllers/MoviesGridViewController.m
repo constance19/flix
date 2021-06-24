@@ -91,7 +91,7 @@
         NSDictionary *movie = self.movies[indexPath.item];
         DetailsViewController *postersDetailViewController = [segue destinationViewController];
         postersDetailViewController.movie = movie;
-        NSLog(@"Tapping into poster cell!");
+        NSLog(@"Tapping on a poster cell movie!");
     }
 }
 
