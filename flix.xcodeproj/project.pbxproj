@@ -19,6 +19,7 @@
 		78555225268399BC00C810C2 /* MoviesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78555224268399BC00C810C2 /* MoviesViewController.m */; };
 		7855522F2683C54000C810C2 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7855522E2683C54000C810C2 /* MovieCell.m */; };
 		78555232268405C700C810C2 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78555231268405C700C810C2 /* DetailsViewController.m */; };
+		785552352684442400C810C2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 785552342684442400C810C2 /* Reachability.m */; };
 		D11F86A21AA27F05AF9240DD /* Pods_flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441F931D43FAFD4D667C0683 /* Pods_flix.framework */; };
 		D4C95973AF265CD9EACEF1AC /* Pods_flix_flixUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071D41480C1D147C17988A57 /* Pods_flix_flixUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,8 @@
 		7855522E2683C54000C810C2 /* MovieCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
 		78555230268405C700C810C2 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		78555231268405C700C810C2 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		785552332684442400C810C2 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../../../Downloads/Reachability-master/Reachability.h"; sourceTree = "<group>"; };
+		785552342684442400C810C2 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../../../Downloads/Reachability-master/Reachability.m"; sourceTree = "<group>"; };
 		A6C2942BE842620E8A5A62A7 /* Pods-flixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flixTests.debug.xcconfig"; path = "Target Support Files/Pods-flixTests/Pods-flixTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +140,8 @@
 		785551ED2683927E00C810C2 /* flix */ = {
 			isa = PBXGroup;
 			children = (
+				785552332684442400C810C2 /* Reachability.h */,
+				785552342684442400C810C2 /* Reachability.m */,
 				785552292683B14000C810C2 /* View Controllers */,
 				785552282683B12400C810C2 /* Models */,
 				785552272683B11900C810C2 /* Views */,
@@ -451,6 +456,7 @@
 				785551F02683927E00C810C2 /* AppDelegate.m in Sources */,
 				7855522F2683C54000C810C2 /* MovieCell.m in Sources */,
 				78555225268399BC00C810C2 /* MoviesViewController.m in Sources */,
+				785552352684442400C810C2 /* Reachability.m in Sources */,
 				78555232268405C700C810C2 /* DetailsViewController.m in Sources */,
 				785552012683927F00C810C2 /* main.m in Sources */,
 				785551F32683927E00C810C2 /* SceneDelegate.m in Sources */,

@@ -20,6 +20,11 @@
                                 <rect key="frame" x="0.0" y="29" width="414" height="833"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="WRZ-Tb-khB">
+                                    <rect key="frame" x="0.0" y="237.00000034679067" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </activityIndicatorView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="188" id="Heu-AI-g7r" customClass="MovieCell">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="188"/>
@@ -65,6 +70,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Movies" id="ido-Hq-hdf"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="WRZ-Tb-khB" id="SVU-Yr-CzY"/>
                         <outlet property="tableView" destination="CaD-Vm-CJP" id="ery-HT-XC1"/>
                     </connections>
                 </viewController>
