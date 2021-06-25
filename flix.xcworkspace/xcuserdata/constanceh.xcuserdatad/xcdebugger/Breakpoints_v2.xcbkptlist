@@ -14,10 +14,74 @@
             filePath = "flix/View Controllers/MoviesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDBDF4BC-3365-49D1-8E21-D2579C8A2DCC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "flix/View Controllers/MoviesGridViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-gridSearch:textDidChange:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "695E4862-2E59-49D3-AB8E-275544C98E90"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "flix/View Controllers/MoviesGridViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-gridSearch:textDidChange:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "695E4862-2E59-49D3-AB8E-275544C98E90 - 539544ea60b39cfd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MoviesGridViewController searchBar:textDidChange:]"
+                  moduleName = "flix"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/constanceh/Documents/xcode/flix/flix/View%20Controllers/MoviesGridViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "695E4862-2E59-49D3-AB8E-275544C98E90 - 2c2d19c2538d7586"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[MoviesGridViewController searchBar:textDidChange:]_block_invoke"
+                  moduleName = "flix"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/constanceh/Documents/xcode/flix/flix/View%20Controllers/MoviesGridViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

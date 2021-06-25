@@ -9,8 +9,6 @@
 #import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
-#import <SVProgressHUD/SVProgressHUD.h>
-#import "Reachability.h"
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -47,7 +45,6 @@
 }
 
 - (void)fetchMovies {
-//    [SVProgressHUD show];
 //    [self.activityIndicator startAnimating];
     
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
@@ -96,7 +93,6 @@
             // TODO: Reload your table view data
            }
         
-//        [SVProgressHUD dismiss];
         [self.refreshControl endRefreshing];
        }];
     [task resume];
@@ -107,13 +103,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection: (NSInteger)section {
-//    return self.movies.count;
-//}
-
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection: (NSInteger)section {
     return self.filteredData.count;
-//    return self.movies.count;
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
