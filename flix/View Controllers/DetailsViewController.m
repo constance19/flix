@@ -40,12 +40,10 @@
     // Set the text of the title and synopsis labels
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"overview"];
-//    self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
 
-    
     [self.titleLabel sizeToFit];
     [self.synopsisLabel sizeToFit];
-    
 }
 
 /*

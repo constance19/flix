@@ -30,8 +30,9 @@
     self.gridSearch.delegate = self;
     
     [self fetchMovies];
-    self.filteredData = self.movies;
+    self.filteredData = self.movies; // set filtered movies for search feature
     
+    // Set grid view formatting
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     
     layout.minimumInteritemSpacing = 5;
@@ -58,8 +59,9 @@
                UIAlertAction *tryAction = [UIAlertAction actionWithTitle:@"Try Again"
                                                                    style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                        // handle try again response here. Doing nothing will dismiss the view.
+                   [self fetchMovies]; // try again response
                                                                  }];
+               
                // add the try again action to the alertController
                [alert addAction:tryAction];
                
@@ -72,15 +74,16 @@
             // No network error
            } else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
                self.movies = dataDictionary[@"results"];
                self.filteredData = self.movies;
+               
                [self.collectionView reloadData];
            }
        }];
     [task resume];
 }
 
+// Filtering of movies for search bar
 - (void)searchBar:(UISearchBar *)gridSearch textDidChange:(NSString *)searchText {
 
     if (searchText.length != 0) {
@@ -88,11 +91,11 @@
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
             return [evaluatedObject[@"title"] containsString:searchText];
         }];
+        
         self.filteredData = [self.movies filteredArrayUsingPredicate:predicate];
         NSLog(@"Filtered");
         NSLog(@"%@", self.filteredData);
         NSLog(@"End of Filtered");
-
     }
     else {
         self.filteredData = self.movies;
@@ -102,10 +105,12 @@
 
 }
 
+// Show cancel button on the far right of the search bar if user has typed
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.gridSearch.showsCancelButton = YES;
 }
 
+// When user clicks cancel button, delete text and hide cancel button
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.gridSearch.showsCancelButton = NO;
     self.gridSearch.text = @"";
@@ -129,58 +134,23 @@
     }
 }
 
+// Get the number of movies that should be in view
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.filteredData.count;
 }
 
+// Set the poster image for each movie in view
+// Includes optional feature of fading in and loading a high-res image followed by a low-res image
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
     
+    MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
     NSDictionary *movie = self.filteredData[indexPath.item];
     
     NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", movie[@"poster_path"]];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    NSURL *urlSmall = [NSURL URLWithString:@"https://image.tmdb.org/t/p/w200/j0BtDE8M4Q2sJANrQjCosU8N7ji.jpg"];
-    NSURL *urlLarge = [NSURL URLWithString:@"https://image.tmdb.org/t/p/w500/j0BtDE8M4Q2sJANrQjCosU8N7ji.jpg"];
-
-    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlSmall];
-    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlLarge];
-    
-    [cell.posterView setImageWithURLRequest:requestSmall
-                          placeholderImage:nil
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
-                                       
-                                       // smallImageResponse will be nil if the smallImage is already available
-                                       // in cache (might want to do something smarter in that case).
-                                       cell.posterView.alpha = 0.0;
-                                       cell.posterView.image = smallImage;
-                                       
-                                       [UIView animateWithDuration:0.3
-                                                        animations:^{
-                                                            
-                                           cell.posterView.alpha = 1.0;
-                                                            
-                                                        } completion:^(BOOL finished) {
-                                                            // The AFNetworking ImageView Category only allows one request to be sent at a time
-                                                            // per ImageView. This code must be in the completion block.
-                                                            [cell.posterView setImageWithURLRequest:requestLarge
-                                                                                  placeholderImage:smallImage
-                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
-                                                                cell.posterView.image = largeImage;
-                                                                                  }
-                                                                                           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                                               // do something for the failure condition of the large image request
-                                                                                               // possibly setting the ImageView's image to a default image
-                                                                                           }];
-                                                        }];
-                                   }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       // do something for the failure condition
-                                       // possibly try to get the large image
-                                   }];
-    
+    // Gradually fade in the images loaded from the network
     [cell.posterView setImageWithURLRequest:request placeholderImage:nil
                                     success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
                                         
@@ -195,14 +165,64 @@
                                                 cell.posterView.alpha = 1.0;
                                             }];
                                         }
+        
+                                        // If not cached
                                         else {
                                             NSLog(@"Image was cached so just update the image");
                                             cell.posterView.image = image;
                                         }
                                     }
+     
                                     failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
                                         // do something for the failure condition
                                     }];
+    
+    // Get the low-resolution image
+    NSString *urlSmall = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w45/%@", movie[@"poster_path"]];
+    NSURL *urlLow = [NSURL URLWithString:urlSmall];
+    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlLow];
+    
+    // Get the high-resolution image
+    NSString *urlLarge = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/original/%@", movie[@"poster_path"]];
+    NSURL *urlHigh = [NSURL URLWithString:urlLarge];
+    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlHigh];
+
+    // Load a low-resolution image followed by a high-resolution image
+    [cell.posterView setImageWithURLRequest:requestSmall
+                           placeholderImage:nil
+                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+                                       
+                                       // smallImageResponse will be nil if the smallImage is already available
+                                       // in cache (might want to do something smarter in that case).
+                                       cell.posterView.alpha = 0.0;
+                                       cell.posterView.image = smallImage;
+                                       
+                                       [UIView animateWithDuration:0.3
+                                                        animations:^{
+                                           
+                                           cell.posterView.alpha = 1.0;
+                                                            
+                                       } completion:^(BOOL finished) {
+                                           // The AFNetworking ImageView Category only allows one request to be sent at a time
+                                           // per ImageView. This code must be in the completion block.
+                                           [cell.posterView setImageWithURLRequest:requestLarge
+                                                                  placeholderImage:smallImage
+                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
+                                               cell.posterView.image = largeImage;
+                                               
+                                           }
+                                                                           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                               // do something for the failure condition of the large image request
+                                               // possibly setting the ImageView's image to a default image
+                                               //cell.imageView.image =
+                                           }];
+                                           
+                                       }];
+                                   }
+                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                       // do something for the failure condition
+                                       // possibly try to get the large image
+                                   }];
     
     return cell;
 }

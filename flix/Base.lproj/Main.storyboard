@@ -179,6 +179,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="t2r-Uw-aKh"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="NgT-K1-3Ex"/>
                             </scrollView>
@@ -206,7 +207,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
-                        <color key="selectedImageTintColor" systemColor="systemTealColor"/>
+                        <color key="selectedImageTintColor" systemColor="systemIndigoColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="wt0-tN-Qd9" kind="relationship" relationship="viewControllers" id="zD8-U1-djI"/>
@@ -217,11 +218,13 @@
             </objects>
             <point key="canvasLocation" x="984" y="-699"/>
         </scene>
-        <!--List-->
+        <!--List View-->
         <scene sceneID="jcK-uI-vGn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wt0-tN-Qd9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" id="tCN-z9-kEB"/>
+                    <tabBarItem key="tabBarItem" title="List View" image="list_tabbar_item" id="tCN-z9-kEB">
+                        <color key="badgeColor" red="0.57602103737492183" green="0.5624134409295638" blue="1" alpha="0.31993424811330784" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x7V-Lr-5GG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -236,12 +239,14 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="110.49107142857143"/>
         </scene>
-        <!--Collection-->
+        <!--Grid View-->
         <scene sceneID="pAZ-Ka-a1h">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SX4-XQ-9Oe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="4Wp-wB-3fR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="pEk-vM-qpW"/>
+                    <tabBarItem key="tabBarItem" title="Grid View" image="grid_tabbar_item" id="pEk-vM-qpW">
+                        <color key="badgeColor" red="0.54501026870000002" green="0.52543586490000005" blue="0.52941238879999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gJ1-wW-XBI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -258,8 +263,16 @@
         <segue reference="FDZ-bE-pPw"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="grid_tabbar_item" width="30" height="30"/>
+        <image name="list_tabbar_item" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

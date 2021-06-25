@@ -36,17 +36,16 @@
     [self fetchMovies];
 //    [self.activityIndicator stopAnimating];
     
+    // Initial setup for the search feature's filtered movies
     self.filteredData = self.movies;
     
+    // For pull to refresh feature
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
 }
 
 - (void)fetchMovies {
-//    [self.activityIndicator startAnimating];
-    
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -55,15 +54,15 @@
         // Handle network error with alert message
            if (error != nil) {
                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
-                                                                                          message:@"The internet connection appears to be offline."
-                                                                                   preferredStyle:(UIAlertControllerStyleAlert)];
+                                                                              message:@"The internet connection appears to be offline."
+                                                                       preferredStyle:(UIAlertControllerStyleAlert)];
                
                UIAlertAction *tryAction = [UIAlertAction actionWithTitle:@"Try Again"
                                                                    style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                   [self fetchMovies];
-                                                                        // handle try again response here. Doing nothing will dismiss the view.
-                                                                 }];
+                   [self fetchMovies]; // try again response
+               }];
+
                // add the try again action to the alertController
                [alert addAction:tryAction];
                
@@ -73,28 +72,26 @@
                
                NSLog(@"%@", [error localizedDescription]);
                
-            // No network error
+        // If no network error
            } else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-               
                NSLog(@"%@", dataDictionary);
                
-               // TODO: Get the array of movies
+               // Get the array of movies
                self.movies = dataDictionary[@"results"];
-               self.filteredData = self.movies;
+               self.filteredData = self.movies; // for search feature
                
                for (NSDictionary *movie in self.movies) {
                    NSLog(@"%@", movie[@"title"]);
                }
                
+               // Reload table view data
                [self.tableView reloadData];
-               
-               // TODO: Store the movies in a property to use elsewhere
-            // TODO: Reload your table view data
            }
         
         [self.refreshControl endRefreshing];
-       }];
+    }];
+    
     [task resume];
 }
 
@@ -103,37 +100,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Get the number of movies that should be in view
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection: (NSInteger)section {
     return self.filteredData.count;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
-//    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-//
-////    NSLog(@"%@", [NSString stringWithFormat:@"row: %d, section %d", indexPath.row, indexPath.section]);
-//
-//    NSDictionary *movie = self.movies[indexPath.row];
-//    cell.titleLabel.text = movie[@"title"];
-//    cell.synopsisLabel.text = movie[@"overview"];
-//
-//    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
-//    NSString *posterURLString = movie[@"poster_path"];
-//    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
-//
-////    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-////    NSURLRequest *request = [NSURLRequest requestWithURL:posterURL];
-//
-//    cell.posterView.image = nil;
-//
-//    [cell.posterView setImageWithURL:posterURL];
-//
-//    return cell;
-//}
-
+// Set each cell's elements: title, synopsis, poster image
+// Includes optional feature of fading in and loading a high-res image followed by a low-res image
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
-//    NSDictionary *movie = self.movies[indexPath.row];
+    
+    // Get the movie, works with search bar
     NSDictionary *movie = self.filteredData[indexPath.row];
 
+    // Set the title and synopsis labels in the cell
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
@@ -142,46 +121,7 @@
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    NSURL *urlSmall = [NSURL URLWithString:@"https://image.tmdb.org/t/p/w200/j0BtDE8M4Q2sJANrQjCosU8N7ji.jpg"];
-    NSURL *urlLarge = [NSURL URLWithString:@"https://image.tmdb.org/t/p/w500/j0BtDE8M4Q2sJANrQjCosU8N7ji.jpg"];
-
-    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlSmall];
-    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlLarge];
-
-
-    [cell.posterView setImageWithURLRequest:requestSmall
-                          placeholderImage:nil
-                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
-                                       
-                                       // smallImageResponse will be nil if the smallImage is already available
-                                       // in cache (might want to do something smarter in that case).
-                                       cell.posterView.alpha = 0.0;
-                                       cell.posterView.image = smallImage;
-                                       
-                                       [UIView animateWithDuration:0.3
-                                                        animations:^{
-                                                            
-                                           cell.posterView.alpha = 1.0;
-                                                            
-                                                        } completion:^(BOOL finished) {
-                                                            // The AFNetworking ImageView Category only allows one request to be sent at a time
-                                                            // per ImageView. This code must be in the completion block.
-                                                            [cell.posterView setImageWithURLRequest:requestLarge
-                                                                                  placeholderImage:smallImage
-                                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
-                                                                cell.posterView.image = largeImage;
-                                                                                  }
-                                                                                           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                                               // do something for the failure condition of the large image request
-                                                                                               // possibly setting the ImageView's image to a default image
-                                                                                           }];
-                                                        }];
-                                   }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       // do something for the failure condition
-                                       // possibly try to get the large image
-                                   }];
-    
+    // Gradually fade in the images loaded from the network
     [cell.posterView setImageWithURLRequest:request placeholderImage:nil
                                     success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
                                         
@@ -196,18 +136,69 @@
                                                 cell.posterView.alpha = 1.0;
                                             }];
                                         }
+        
+                                        // If not cached
                                         else {
                                             NSLog(@"Image was cached so just update the image");
                                             cell.posterView.image = image;
                                         }
                                     }
+     
                                     failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
                                         // do something for the failure condition
                                     }];
     
+    // Get the low-resolution image
+    NSString *urlSmall = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w45/%@", movie[@"poster_path"]];
+    NSURL *urlLow = [NSURL URLWithString:urlSmall];
+    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlLow];
+    
+    // Get the high-resolution image
+    NSString *urlLarge = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/original/%@", movie[@"poster_path"]];
+    NSURL *urlHigh = [NSURL URLWithString:urlLarge];
+    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlHigh];
+
+    // Load a low-resolution image followed by a high-resolution image
+    [cell.posterView setImageWithURLRequest:requestSmall
+                           placeholderImage:nil
+                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+                                       
+                                       // smallImageResponse will be nil if the smallImage is already available
+                                       // in cache (might want to do something smarter in that case).
+                                       cell.posterView.alpha = 0.0;
+                                       cell.posterView.image = smallImage;
+                                       
+                                       [UIView animateWithDuration:0.3
+                                                        animations:^{
+                                           
+                                           cell.posterView.alpha = 1.0;
+                                                            
+                                       } completion:^(BOOL finished) {
+                                           // The AFNetworking ImageView Category only allows one request to be sent at a time
+                                           // per ImageView. This code must be in the completion block.
+                                           [cell.posterView setImageWithURLRequest:requestLarge
+                                                                  placeholderImage:smallImage
+                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
+                                               cell.posterView.image = largeImage;
+                                               
+                                           }
+                                                                           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                               // do something for the failure condition of the large image request
+                                               // possibly setting the ImageView's image to a default image
+                                               //cell.imageView.image =
+                                           }];
+                                           
+                                       }];
+                                   }
+                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                       // do something for the failure condition
+                                       // possibly try to get the large image
+                                   }];
+    
     return cell;
 }
 
+// Filtering of movies for search bar
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 
     if (searchText.length != 0) {
@@ -228,10 +219,12 @@
 
 }
 
+// Show cancel button on the far right of the search bar if user has typed
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = YES;
 }
 
+// When user clicks cancel button, delete text and hide cancel button
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
@@ -246,7 +239,13 @@
     // Pass the selected object to the new view controller.
     
     UITableViewCell *tappedCell = sender;
-    tappedCell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
+    // Customize selected cell color
+    UIView *backgroundView = [[UIView alloc] init];
+    UIColor *myPurple = [UIColor colorWithRed:0.551 green:0.527 blue:0.931 alpha:0.3];
+    backgroundView.backgroundColor = myPurple;
+    tappedCell.selectedBackgroundView = backgroundView;
+    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     NSDictionary *movie = self.filteredData[indexPath.row];
     
