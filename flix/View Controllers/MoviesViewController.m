@@ -237,6 +237,7 @@
     // Pass the selected object to the new view controller.
     
     UITableViewCell *tappedCell = sender;
+    tappedCell.selectionStyle = UITableViewCellSelectionStyleDefault;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     NSDictionary *movie = self.movies[indexPath.row];
     
