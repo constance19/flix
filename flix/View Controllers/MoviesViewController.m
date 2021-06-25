@@ -12,43 +12,19 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "Reachability.h"
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 //@property (nonatomic) Reachability *internetReachability;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSArray *filteredData;
 
 @end
 
 @implementation MoviesViewController
-
-//// Checks if we have an internet connection or not
-//- (void)testInternetConnection
-//{
-//    self.internetReachability = [Reachability reachabilityWithHostname:@"www.facebook.com"];
-//
-//    // Internet is reachable
-//    self.internetReachability.reachableBlock = ^(Reachability*reach)
-//    {
-//        // Update the UI on the main thread
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"Yayyy, we have the interwebs!");
-//        });
-//    };
-//
-//    // Internet is not reachable
-//    self.internetReachability.unreachableBlock = ^(Reachability*reach)
-//    {
-//        // Update the UI on the main thread
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"Someone broke the internet :(");
-//        });
-//    };
-//
-//    [self.internetReachability startNotifier];
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,14 +32,18 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
     
     [self.activityIndicator startAnimating];
     [self fetchMovies];
 //    [self.activityIndicator stopAnimating];
     
+    self.filteredData = self.movies;
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
 }
 
 - (void)fetchMovies {
@@ -101,8 +81,11 @@
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                
                NSLog(@"%@", dataDictionary);
+               
                // TODO: Get the array of movies
                self.movies = dataDictionary[@"results"];
+               self.filteredData = self.movies;
+               
                for (NSDictionary *movie in self.movies) {
                    NSLog(@"%@", movie[@"title"]);
                }
@@ -124,8 +107,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+//- (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection: (NSInteger)section {
+//    return self.movies.count;
+//}
+
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection: (NSInteger)section {
-    return self.movies.count;
+    return self.filteredData.count;
+//    return self.movies.count;
 }
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
@@ -152,7 +140,8 @@
 //}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
-    NSDictionary *movie = self.movies[indexPath.row];
+//    NSDictionary *movie = self.movies[indexPath.row];
+    NSDictionary *movie = self.filteredData[indexPath.row];
 
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     cell.titleLabel.text = movie[@"title"];
@@ -228,6 +217,35 @@
     return cell;
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+
+    if (searchText.length != 0) {
+
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
+            return [evaluatedObject[@"title"] containsString:searchText];
+        }];
+        self.filteredData = [self.movies filteredArrayUsingPredicate:predicate];
+
+        NSLog(@"%@", self.filteredData);
+
+    }
+    else {
+        self.filteredData = self.movies;
+    }
+
+    [self.tableView reloadData];
+
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
 
 #pragma mark - Navigation
 
@@ -239,7 +257,7 @@
     UITableViewCell *tappedCell = sender;
     tappedCell.selectionStyle = UITableViewCellSelectionStyleDefault;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    NSDictionary *movie = self.movies[indexPath.row];
+    NSDictionary *movie = self.filteredData[indexPath.row];
     
     DetailsViewController *detailsViewController = [segue destinationViewController];
     detailsViewController.movie = movie;
