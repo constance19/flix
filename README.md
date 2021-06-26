@@ -2,7 +2,7 @@
 
 flix is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: 18 hours spent in total
+Time spent: 19 hours spent in total
 
 ## User Stories
 
@@ -43,8 +43,17 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
+Table view for movie display:
 ![flix table view](flix_table_compress.gif) / ! [](flix_table_compress.gif)
+
+Grid view for movie display:
 ![flix grid view](flix_grid_compress.gif) / ! [](flix_grid_compress.gif)
+
+Loading state (activity indicator for poor internet):
+![flix loading state](flix_loading_state.gif) / ! [](flix_loading_state.gif)
+
+Network error (no internet alert message, reconnection):
+![flix network error](flix_network_error.gif) / ! [](flix_network_error.gif)
 
 GIF created with [ezgif](https://ezgif.com/video-to-gif).
 
