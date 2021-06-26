@@ -50,10 +50,10 @@ Grid view for movie display:
 ![flix grid view](flix_grid_compress.gif) / ! [](flix_grid_compress.gif)
 
 Loading state (activity indicator for poor internet):
-![flix loading state](flix_loading_state.gif) / ! [](flix_loadingstate.gif)
+![flix loading state](flix_loadingstate.gif) / ! [](flix_loadingstate.gif)
 
 Network error (no internet alert message, reconnection):
-![flix network error](flix_network_error.gif) / ! [](flix_networkerror.gif)
+![flix network error](flix_networkerror.gif) / ! [](flix_networkerror.gif)
 
 GIF created with [ezgif](https://ezgif.com/video-to-gif).
 
