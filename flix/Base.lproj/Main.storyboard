@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" sceneMemberID="viewController">
@@ -20,16 +20,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="188" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CaD-Vm-CJP">
                                 <rect key="frame" x="0.0" y="29" width="414" height="833"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.093242168149999999" green="0.091428094160000001" blue="0.1073668175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" text="" id="xAA-M7-Hgb">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.08629672041" green="0.085391701" blue="0.1031141773" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="barTintColor" red="0.093242168152448859" green="0.091428094155224501" blue="0.10736681751369204" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="WRZ-Tb-khB">
                                     <rect key="frame" x="0.0" y="876.6363639831543" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </activityIndicatorView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="188" id="Heu-AI-g7r" customClass="MovieCell">
@@ -45,22 +47,23 @@
                                                     <color key="backgroundColor" red="0.8870043755" green="0.85650700329999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suicide Squad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yb-nb-krA">
-                                                    <rect key="frame" x="140" y="12" width="247" height="28"/>
+                                                    <rect key="frame" x="140" y="10" width="247" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" systemColor="systemBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVr-P2-DzV">
-                                                    <rect key="frame" x="140" y="40" width="242" height="137"/>
+                                                    <rect key="frame" x="140" y="44" width="242" height="128"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <string key="text">From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.</string>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                                    <color key="textColor" systemColor="systemBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.093242168149999999" green="0.091428094160000001" blue="0.1073668175" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="posterView" destination="2D3-eY-bgi" id="H1G-zs-c0R"/>
                                             <outlet property="synopsisLabel" destination="bVr-P2-DzV" id="exO-Ad-mqP"/>
@@ -72,9 +75,9 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.075222404526924275" green="0.074338315918764108" blue="0.08978114177271268" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="ido-Hq-hdf"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="ido-Hq-hdf"/>
                     <connections>
                         <outlet property="activityIndicator" destination="WRZ-Tb-khB" id="SVU-Yr-CzY"/>
                         <outlet property="searchBar" destination="xAA-M7-Hgb" id="sdP-eu-Q8p"/>
@@ -85,7 +88,7 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="926.78571428571422"/>
         </scene>
-        <!--Movies-->
+        <!--Now Playing-->
         <scene sceneID="xwp-Q5-W6h">
             <objects>
                 <viewController id="awv-yL-R2M" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -96,7 +99,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="b0Z-dg-dRc">
                                 <rect key="frame" x="0.0" y="132" width="414" height="731"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.065963999549999999" green="0.061922510569999999" blue="0.083172984960000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Z5D-BE-9yd">
                                     <size key="itemSize" width="144" height="219"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -128,13 +131,14 @@
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zae-7M-SjQ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.070479851029999999" green="0.068624218619999997" blue="0.081383773960000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="l8U-rj-yeb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.055105148670169767" green="0.051436186307880133" blue="0.069083302291398141" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="Vf0-vZ-4fL"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="Vf0-vZ-4fL"/>
                     <connections>
                         <outlet property="collectionView" destination="b0Z-dg-dRc" id="fEv-F6-Ziz"/>
                         <outlet property="gridSearch" destination="zae-7M-SjQ" id="gaa-Ps-wZa"/>
@@ -153,33 +157,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qPz-d8-Bh8">
-                                <rect key="frame" x="0.0" y="34" width="414" height="828"/>
+                                <rect key="frame" x="0.0" y="34" width="414" height="779"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUu-SL-Uyw">
-                                        <rect key="frame" x="0.0" y="-54" width="414" height="263"/>
+                                        <rect key="frame" x="0.0" y="-16" width="414" height="263"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebf-ap-vbA">
-                                        <rect key="frame" x="22" y="132" width="106" height="179"/>
+                                        <rect key="frame" x="126" y="109" width="162" height="214"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckb-Re-Tw1">
-                                        <rect key="frame" x="22" y="339" width="350" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY6-J6-l50">
+                                        <rect key="frame" x="22" y="344" width="350" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                        <color key="textColor" systemColor="systemBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fY6-J6-l50">
-                                        <rect key="frame" x="136" y="238" width="250" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckb-Re-Tw1">
+                                        <rect key="frame" x="22" y="416" width="341" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="backgroundColor" red="0.026978343990263037" green="0.02646898296659048" blue="0.036834795450426894" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="t2r-Uw-aKh"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="NgT-K1-3Ex"/>
                             </scrollView>
@@ -190,6 +194,7 @@
                     <navigationItem key="navigationItem" id="HiQ-f4-UaT"/>
                     <connections>
                         <outlet property="backdropView" destination="lUu-SL-Uyw" id="ynB-qB-fcD"/>
+                        <outlet property="navigationItem" destination="HiQ-f4-UaT" id="9Ll-dC-C1r"/>
                         <outlet property="posterView" destination="ebf-ap-vbA" id="f8O-ez-sl7"/>
                         <outlet property="synopsisLabel" destination="ckb-Re-Tw1" id="WLv-k2-hvL"/>
                         <outlet property="titleLabel" destination="fY6-J6-l50" id="ePs-6N-Zr3"/>
@@ -206,8 +211,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fiS-ft-BRO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
-                        <color key="selectedImageTintColor" systemColor="systemIndigoColor"/>
+                        <color key="backgroundColor" red="0.070479851028091942" green="0.068624218619389665" blue="0.081383773961018036" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.08629672041" green="0.085391701" blue="0.1031141773" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.89479273560000006" green="0.85251945259999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="wt0-tN-Qd9" kind="relationship" relationship="viewControllers" id="zD8-U1-djI"/>
@@ -218,17 +224,21 @@
             </objects>
             <point key="canvasLocation" x="984" y="-699"/>
         </scene>
-        <!--List View-->
+        <!--Movie List-->
         <scene sceneID="jcK-uI-vGn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wt0-tN-Qd9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List View" image="list_tabbar_item" id="tCN-z9-kEB">
+                    <tabBarItem key="tabBarItem" title="Movie List" image="list_tabbar_item" id="tCN-z9-kEB">
                         <color key="badgeColor" red="0.57602103737492183" green="0.5624134409295638" blue="1" alpha="0.31993424811330784" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x7V-Lr-5GG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.070479851029999999" green="0.068624218619999997" blue="0.081383773960000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.86844492839999998" green="0.85154888890000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -239,17 +249,21 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="110.49107142857143"/>
         </scene>
-        <!--Grid View-->
+        <!--Movie Grid-->
         <scene sceneID="pAZ-Ka-a1h">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SX4-XQ-9Oe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="4Wp-wB-3fR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Grid View" image="grid_tabbar_item" id="pEk-vM-qpW">
+                    <tabBarItem key="tabBarItem" title="Movie Grid" image="grid_tabbar_item" id="pEk-vM-qpW">
                         <color key="badgeColor" red="0.54501026870000002" green="0.52543586490000005" blue="0.52941238879999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gJ1-wW-XBI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.075222404529999995" green="0.074338315919999995" blue="0.089781141770000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.89479273560000006" green="0.85251945259999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="awv-yL-R2M" kind="relationship" relationship="rootViewController" id="PxA-99-afK"/>
@@ -262,20 +276,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="FDZ-bE-pPw"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.89504631280000002" green="0.87908688820000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="grid_tabbar_item" width="30" height="30"/>
         <image name="list_tabbar_item" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -31,6 +31,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
+    self.searchBar.barStyle = UIBarStyleBlack;
     
     [self.activityIndicator startAnimating];
     [self fetchMovies];
@@ -41,6 +42,7 @@
     
     // For pull to refresh feature
     self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor whiteColor]];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
@@ -148,53 +150,6 @@
                                         // do something for the failure condition
                                     }];
     
-    // Get the low-resolution image
-    NSString *urlSmall = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w45/%@", movie[@"poster_path"]];
-    NSURL *urlLow = [NSURL URLWithString:urlSmall];
-    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlLow];
-    
-    // Get the high-resolution image
-    NSString *urlLarge = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/original/%@", movie[@"poster_path"]];
-    NSURL *urlHigh = [NSURL URLWithString:urlLarge];
-    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlHigh];
-
-    // Load a low-resolution image followed by a high-resolution image
-    [cell.posterView setImageWithURLRequest:requestSmall
-                           placeholderImage:nil
-                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
-                                       
-                                       // smallImageResponse will be nil if the smallImage is already available
-                                       // in cache (might want to do something smarter in that case).
-                                       cell.posterView.alpha = 0.0;
-                                       cell.posterView.image = smallImage;
-                                       
-                                       [UIView animateWithDuration:0.3
-                                                        animations:^{
-                                           
-                                           cell.posterView.alpha = 1.0;
-                                                            
-                                       } completion:^(BOOL finished) {
-                                           // The AFNetworking ImageView Category only allows one request to be sent at a time
-                                           // per ImageView. This code must be in the completion block.
-                                           [cell.posterView setImageWithURLRequest:requestLarge
-                                                                  placeholderImage:smallImage
-                                                                           success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
-                                               cell.posterView.image = largeImage;
-                                               
-                                           }
-                                                                           failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                               // do something for the failure condition of the large image request
-                                               // possibly setting the ImageView's image to a default image
-                                               //cell.imageView.image =
-                                           }];
-                                           
-                                       }];
-                                   }
-                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                       // do something for the failure condition
-                                       // possibly try to get the large image
-                                   }];
-    
     return cell;
 }
 
@@ -241,6 +196,8 @@
     UITableViewCell *tappedCell = sender;
     
     // Customize selected cell color
+//    tappedCell.selectionStyle = UITableViewCellSelectionStyleDefault;
+
     UIView *backgroundView = [[UIView alloc] init];
     UIColor *myPurple = [UIColor colorWithRed:0.551 green:0.527 blue:0.931 alpha:0.3];
     backgroundView.backgroundColor = myPurple;
