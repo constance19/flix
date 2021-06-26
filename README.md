@@ -44,15 +44,19 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 Table view for movie display:
+
 ![flix table view](flix_table_compress.gif) / ! [](flix_table_compress.gif)
 
 Grid view for movie display:
+
 ![flix grid view](flix_grid_compress.gif) / ! [](flix_grid_compress.gif)
 
 Loading state (activity indicator for poor internet):
+
 ![flix loading state](flix_loadingstate.gif) / ! [](flix_loadingstate.gif)
 
 Network error (no internet alert message, reconnection):
+
 ![flix network error](flix_networkerror.gif) / ! [](flix_networkerror.gif)
 
 GIF created with [ezgif](https://ezgif.com/video-to-gif).
