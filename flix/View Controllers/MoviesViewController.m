@@ -32,6 +32,7 @@
     self.tableView.delegate = self;
     self.searchBar.delegate = self;
     self.searchBar.barStyle = UIBarStyleBlack;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.activityIndicator startAnimating];
     [self fetchMovies];
