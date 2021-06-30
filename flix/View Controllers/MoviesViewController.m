@@ -9,16 +9,18 @@
 #import "MovieCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
+#import "Movie.h"
+#import "MovieApiManager.h"
 
 @interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *movies;
+@property (nonatomic, strong) NSMutableArray *movies;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 //@property (nonatomic) Reachability *internetReachability;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) NSArray *filteredData;
+@property (nonatomic, strong) NSMutableArray *filteredData;
 
 @end
 
@@ -79,18 +81,21 @@
            } else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                NSLog(@"%@", dataDictionary);
-               
+
                // Get the array of movies
-               self.movies = dataDictionary[@"results"];
-               self.filteredData = self.movies; // for search feature
-               
-               for (NSDictionary *movie in self.movies) {
-                   NSLog(@"%@", movie[@"title"]);
-               }
-               
-               // Reload table view data
-               [self.tableView reloadData];
+               MovieApiManager *manager = [MovieApiManager new];
+               [manager fetchNowPlaying:^(NSArray *movies, NSError *error) {
+                   if(movies){
+                       self.movies = movies;
+                       self.filteredData = self.movies;
+                       [self.tableView reloadData];
+                   }else{
+                       NSLog(@"%@", error.localizedDescription);
+                   }
+                   
+               }];
            }
+        [self.activityIndicator stopAnimating];
         
         [self.refreshControl endRefreshing];
     }];
@@ -111,46 +116,8 @@
 // Set each cell's elements: title, synopsis, poster image
 // Includes optional feature of fading in and loading a high-res image followed by a low-res image
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath {
-    
-    // Get the movie, works with search bar
-    NSDictionary *movie = self.filteredData[indexPath.row];
-
-    // Set the title and synopsis labels in the cell
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-    cell.titleLabel.text = movie[@"title"];
-    cell.synopsisLabel.text = movie[@"overview"];
-    
-    NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", movie[@"poster_path"]];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // Gradually fade in the images loaded from the network
-    [cell.posterView setImageWithURLRequest:request placeholderImage:nil
-                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
-                                        
-                                        // imageResponse will be nil if the image is cached
-                                        if (imageResponse) {
-                                            NSLog(@"Image was NOT cached, fade in image");
-                                            cell.posterView.alpha = 0.0;
-                                            cell.posterView.image = image;
-                                            
-                                            //Animate UIImageView back to alpha 1 over 0.3sec
-                                            [UIView animateWithDuration:0.3 animations:^{
-                                                cell.posterView.alpha = 1.0;
-                                            }];
-                                        }
-        
-                                        // If not cached
-                                        else {
-                                            NSLog(@"Image was cached so just update the image");
-                                            cell.posterView.image = image;
-                                        }
-                                    }
-     
-                                    failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
-                                        // do something for the failure condition
-                                    }];
-    
+    cell.movie = self.filteredData[indexPath.row]; // Get the movie, works with search bar
     return cell;
 }
 
@@ -159,8 +126,8 @@
 
     if (searchText.length != 0) {
 
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject[@"title"] containsString:searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Movie *evaluatedObject, NSDictionary *bindings) {
+            return [evaluatedObject.title containsString:searchText];
         }];
         self.filteredData = [self.movies filteredArrayUsingPredicate:predicate];
 
@@ -205,7 +172,7 @@
     tappedCell.selectedBackgroundView = backgroundView;
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    NSDictionary *movie = self.filteredData[indexPath.row];
+    Movie *movie = self.filteredData[indexPath.row];
     
     DetailsViewController *detailsViewController = [segue destinationViewController];
     detailsViewController.movie = movie;

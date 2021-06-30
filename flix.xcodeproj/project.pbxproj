@@ -22,6 +22,8 @@
 		785552352684442400C810C2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 785552342684442400C810C2 /* Reachability.m */; };
 		78555238268465BA00C810C2 /* MoviesGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78555237268465BA00C810C2 /* MoviesGridViewController.m */; };
 		7855523B268467FB00C810C2 /* MovieCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7855523A268467FB00C810C2 /* MovieCollectionCell.m */; };
+		7893E4C1268CC748000EC809 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7893E4C0268CC748000EC809 /* Movie.m */; };
+		7893E4C4268CD0F4000EC809 /* MovieApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7893E4C3268CD0F4000EC809 /* MovieApiManager.m */; };
 		D11F86A21AA27F05AF9240DD /* Pods_flix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441F931D43FAFD4D667C0683 /* Pods_flix.framework */; };
 		D4C95973AF265CD9EACEF1AC /* Pods_flix_flixUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071D41480C1D147C17988A57 /* Pods_flix_flixUITests.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,10 @@
 		78555237268465BA00C810C2 /* MoviesGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesGridViewController.m; sourceTree = "<group>"; };
 		78555239268467FB00C810C2 /* MovieCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieCollectionCell.h; sourceTree = "<group>"; };
 		7855523A268467FB00C810C2 /* MovieCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionCell.m; sourceTree = "<group>"; };
+		7893E4BF268CC748000EC809 /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		7893E4C0268CC748000EC809 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		7893E4C2268CD0F4000EC809 /* MovieApiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieApiManager.h; sourceTree = "<group>"; };
+		7893E4C3268CD0F4000EC809 /* MovieApiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieApiManager.m; sourceTree = "<group>"; };
 		A6C2942BE842620E8A5A62A7 /* Pods-flixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flixTests.debug.xcconfig"; path = "Target Support Files/Pods-flixTests/Pods-flixTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +166,8 @@
 				785551FC2683927F00C810C2 /* LaunchScreen.storyboard */,
 				785551FF2683927F00C810C2 /* Info.plist */,
 				785552002683927F00C810C2 /* main.m */,
+				7893E4C2268CD0F4000EC809 /* MovieApiManager.h */,
+				7893E4C3268CD0F4000EC809 /* MovieApiManager.m */,
 			);
 			path = flix;
 			sourceTree = "<group>";
@@ -196,6 +204,8 @@
 		785552282683B12400C810C2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7893E4BF268CC748000EC809 /* Movie.h */,
+				7893E4C0268CC748000EC809 /* Movie.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -465,12 +475,14 @@
 			files = (
 				785551F02683927E00C810C2 /* AppDelegate.m in Sources */,
 				7855522F2683C54000C810C2 /* MovieCell.m in Sources */,
+				7893E4C1268CC748000EC809 /* Movie.m in Sources */,
 				78555225268399BC00C810C2 /* MoviesViewController.m in Sources */,
 				785552352684442400C810C2 /* Reachability.m in Sources */,
 				78555232268405C700C810C2 /* DetailsViewController.m in Sources */,
 				7855523B268467FB00C810C2 /* MovieCollectionCell.m in Sources */,
 				78555238268465BA00C810C2 /* MoviesGridViewController.m in Sources */,
 				785552012683927F00C810C2 /* main.m in Sources */,
+				7893E4C4268CD0F4000EC809 /* MovieApiManager.m in Sources */,
 				785551F32683927E00C810C2 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

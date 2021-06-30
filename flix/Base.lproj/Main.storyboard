@@ -28,7 +28,7 @@
                                     <color key="barTintColor" red="0.093242168152448859" green="0.091428094155224501" blue="0.10736681751369204" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
-                                <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="WRZ-Tb-khB">
+                                <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="WRZ-Tb-khB">
                                     <rect key="frame" x="0.0" y="876.6363639831543" width="414" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -297,7 +297,6 @@
         <!--Movie Grid-->
         <scene sceneID="pAZ-Ka-a1h">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SX4-XQ-9Oe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="4Wp-wB-3fR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Movie Grid" image="grid_tabbar_item" id="pEk-vM-qpW">
                         <color key="badgeColor" red="0.54501026870000002" green="0.52543586490000005" blue="0.52941238879999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -314,12 +313,13 @@
                         <segue destination="awv-yL-R2M" kind="relationship" relationship="rootViewController" id="PxA-99-afK"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SX4-XQ-9Oe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1507" y="110"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FDZ-bE-pPw"/>
+        <segue reference="2bl-jX-eRK"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.89504631280000002" green="0.87908688820000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>

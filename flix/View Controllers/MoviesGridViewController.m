@@ -9,6 +9,8 @@
 #import "MovieCollectionCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
+#import "MovieApimanager.h"
+#import "Movie.h"
 
 @interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
@@ -82,10 +84,20 @@
             // No network error
            } else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-               self.movies = dataDictionary[@"results"];
-               self.filteredData = self.movies;
-               
-               [self.collectionView reloadData];
+               NSLog(@"%@", dataDictionary);
+
+               // Get the array of movies
+               MovieApiManager *manager = [MovieApiManager new];
+               [manager fetchNowPlaying:^(NSArray *movies, NSError *error) {
+                   if(movies){
+                       self.movies = movies;
+                       self.filteredData = self.movies;
+                       [self.collectionView reloadData];
+                   } else {
+                       NSLog(@"%@", error.localizedDescription);
+                   }
+                   
+               }];
            }
         
         [self.refreshControl endRefreshing];
@@ -98,8 +110,8 @@
 
     if (searchText.length != 0) {
 
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject[@"title"] containsString:searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Movie *evaluatedObject, NSDictionary *bindings) {
+            return [evaluatedObject.title containsString:searchText];
         }];
         
         self.filteredData = [self.movies filteredArrayUsingPredicate:predicate];
@@ -137,7 +149,7 @@
         UICollectionViewCell *selectedCell = sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:selectedCell];
 //        NSDictionary *movie = self.movies[indexPath.item];
-        NSDictionary *movie = self.filteredData[indexPath.item];
+        Movie *movie = self.filteredData[indexPath.item];
         DetailsViewController *postersDetailViewController = [segue destinationViewController];
         postersDetailViewController.movie = movie;
         NSLog(@"Tapping on a poster cell movie!");
@@ -154,10 +166,9 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
-    NSDictionary *movie = self.filteredData[indexPath.item];
+    Movie *movie = self.filteredData[indexPath.item];
     
-    NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", movie[@"poster_path"]];
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = movie.posterUrl;
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     // Gradually fade in the images loaded from the network

@@ -24,21 +24,22 @@
     // Do any additional setup after loading the view.
     
     // Get the poster URL to set the poster view
-    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
-    NSString *posterURLString = self.movie[@"poster_path"];
-    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+//    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
+//    NSString *posterURLString = self.movie.posterUrl;
+//    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+    //  [NSURL URLWithString:fullPosterURLString];
     
-    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    NSURL *posterURL = self.movie.posterUrl;
     [self.posterView setImageWithURL:posterURL];
     
     
     // Get the low-resolution backdrop image
-    NSString *urlSmall = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w45/%@", self.movie[@"backdrop_path"]];
+    NSString *urlSmall = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w45/%@", self.movie.backdropUrl];
     NSURL *urlLow = [NSURL URLWithString:urlSmall];
     NSURLRequest *requestSmall = [NSURLRequest requestWithURL:urlLow];
     
     // Get the high-resolution backdrop image
-    NSString *urlLarge = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/original/%@", self.movie[@"backdrop_path"]];
+    NSString *urlLarge = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/original/%@", self.movie.backdropUrl];
     NSURL *urlHigh = [NSURL URLWithString:urlLarge];
     NSURLRequest *requestLarge = [NSURLRequest requestWithURL:urlHigh];
 
@@ -80,8 +81,8 @@
                                    }];
     
     // Set the text of the title and synopsis labels
-    self.titleLabel.text = self.movie[@"title"];
-    self.synopsisLabel.text = self.movie[@"overview"];
+    self.titleLabel.text = self.movie.title;
+    self.synopsisLabel.text = self.movie.overview;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
 
     [self.titleLabel sizeToFit];
